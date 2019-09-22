@@ -10,38 +10,45 @@ You will need to take into account the size of the image.
 var exercise = {};
 exercise.flag = 0; // 0 = mouth open  1 = mouth shut
 exercise.increment = 20; // pixels to move either + or -
-exercise.run = function() {
+exercise.run = function () {
     exercise.img1 = document.getElementById('PacMan');
     exercise.updatePosition();
     exercise.checkWallCollision();
     exercise.chooseImage();
 };
-exercise.updatePosition = function() {
+exercise.updatePosition = function () {
     // increment exercise.pos.x by increment 
     // now set image position using img1.style.left 
     // remember images positions are "xxx.px"
-
+    exercise.pos.x += increment;
+    exercise.img1.style.left = exercise.pos.x;
 
 };
-exercise.chooseImage = function() {
+exercise.chooseImage = function () {
     // choose between all 4 images
     if (exercise.increment > 0) {
         if (exercise.flag === 1) {
-
+            exercise.img1.src = 'PacMan1.png';
+            exercise.flag = 0;
         } else {
-
+            exercise.img1.src = 'PacMan2.png';
+            exercise.flag = 1;
         }
     } else if (exercise.increment < 0) {
         if (exercise.flag === 1) {
-
+            exercise.img1.src = 'PacMan3.png';
+            exercise.flag = 0;
         } else {
-
+            exercise.img1.src = 'PacMan4.png';
+            exercise.flag = 1;
         }
     }
 };
-exercise.checkWallCollision = function() {
+exercise.checkWallCollision = function () {
     // reset the direction of motion if wall is hit
     // you need to take into account image width
-
+    if (exercise.pos.x < 0 || exercise.pos.x > 600) {
+        exercise.increment *= -1;
+    }
 
 };
